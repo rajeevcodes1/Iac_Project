@@ -1,0 +1,239 @@
+/* ========= LIGHT & DARK GREEN THEMES ========= */
+
+/* Light theme (default) */
+:root {
+  --page-bg: #e0f2e9;
+  --card-bg: #ffffff;
+
+  --sidebar-bg: #064e3b;
+  --sidebar-text: #e5e7eb;
+
+  --topbar-bg: linear-gradient(90deg, #0f9d58, #22c55e);
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+
+  --border-subtle: #cbd5e1;
+
+  --button-bg: #16a34a;
+  --button-bg-hover: #15803d;
+}
+
+/* Dark theme overrides (we ONLY change vars) */
+body[data-theme="dark"] {
+  --page-bg: #020617;
+  --card-bg: #020817;
+
+  --sidebar-bg: #020617;
+  --sidebar-text: #e5e7eb;
+
+  --topbar-bg: linear-gradient(90deg, #064e3b, #16a34a);
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --border-subtle: #1f2937;
+
+  --button-bg: #22c55e;
+  --button-bg-hover: #16a34a;
+}
+
+/* Base body styling */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+/* Generic text colours */
+div,
+p,
+span,
+label,
+li,
+th,
+td {
+  color: var(--text-main);
+}
+
+.muted-text {
+  color: var(--text-muted);
+}
+
+/* Card helper */
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Inputs & selects */
+input,
+select,
+textarea {
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px;
+  outline: none;
+  background: var(--card-bg);
+  color: var(--text-main);
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--button-bg);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+}
+
+/* Buttons */
+button {
+  background: var(--button-bg);
+  color: #f9fafb;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+button:hover {
+  background: var(--button-bg-hover);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 8px;
+}
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Scrollbar */
+*::-webkit-scrollbar {
+  width: 7px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--page-bg);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--button-bg);
+  border-radius: 8px;
+}
+
+/* Topbar */
+header {
+  background: var(--topbar-bg);
+  color: #f9fafb;
+}
+
+/* Ensure dark theme really applies everywhere */
+body[data-theme="dark"] {
+  background-color: var(--page-bg) !important;
+}
+
+body[data-theme="dark"] input,
+body[data-theme="dark"] select,
+body[data-theme="dark"] textarea {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* Recharts tweaks */
+body[data-theme="dark"] .recharts-default-tooltip {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .recharts-legend-item text {
+  fill: var(--text-main) !important;
+}
+/* ========== REACTIVE ANIMATED BACKGROUND ========== */
+
+.app-shell {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* The moving gradient layer behind all content */
+.app-bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 0% 0%, #22c55e33 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #0ea5e933 0, transparent 55%),
+    radial-gradient(circle at 0% 100%, #a855f733 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #f9731633 0, transparent 55%),
+    linear-gradient(135deg, #bbf7d0, #86efac, #bef264);
+  background-size: 200% 200%;
+  animation: bgGradientMove 22s ease-in-out infinite;
+  filter: blur(0px);
+}
+
+/* Slight dark tint in dark mode for better contrast */
+body[data-theme="dark"] .app-bg-animated {
+  background: radial-gradient(circle at 0% 0%, #22c55e33 0, transparent 55%),
+    radial-gradient(circle at 100% 0%, #0ea5e933 0, transparent 55%),
+    radial-gradient(circle at 0% 100%, #a855f733 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, #f9731633 0, transparent 55%),
+    linear-gradient(135deg, #020617, #022c22, #052e16);
+  animation: bgGradientMove 26s ease-in-out infinite;
+}
+
+/* A subtle glass layer behind cards to keep readability */
+.app-bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(14px) saturate(130%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+
+body[data-theme="dark"] .app-bg-overlay {
+  backdrop-filter: blur(18px) saturate(140%);
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.65),
+    rgba(15, 23, 42, 0.4)
+  );
+}
+
+/* Keyframes for smooth gradient motion */
+@keyframes bgGradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
