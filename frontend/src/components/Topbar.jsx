@@ -28,7 +28,7 @@ const Topbar = () => {
       }}
     >
       <span style={{ fontSize: "16px", fontWeight: 500 }}>
-        SmartEd-City Nexus – Control Center
+        MobiGreen
       </span>
 
       <button

@@ -1,37 +1,31 @@
 import React from "react";
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div className="app-shell">
-      {/* Animated global background */}
+      {/* Animated global background (from your theme-green.css) */}
       <div className="app-bg-animated" />
       <div className="app-bg-overlay" />
 
-      {/* Actual app content */}
+      {/* Foreground app content */}
       <div
         style={{
-          display: "flex",
-          height: "100vh",
           position: "relative",
-          zIndex: 0,
+          minHeight: "100vh",
           color: "var(--text-main)",
         }}
       >
-        <Sidebar />
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Topbar />
-          <main
-            style={{
-              padding: "16px",
-              background: "transparent",
-              overflow: "auto",
-            }}
-          >
-            {children}
-          </main>
-        </div>
+        <Navbar />
+        <main
+          style={{
+            padding: "16px",
+            background: "transparent",
+          }}
+        >
+          <Outlet />
+        </main>
       </div>
     </div>
   );
